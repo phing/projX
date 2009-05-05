@@ -49,17 +49,17 @@ Partial Public Class projXDataContext
     End Sub
   Partial Private Sub Deleteprojx_action(instance As projx_action)
     End Sub
-  Partial Private Sub InsertprojX(instance As projX)
-    End Sub
-  Partial Private Sub UpdateprojX(instance As projX)
-    End Sub
-  Partial Private Sub DeleteprojX(instance As projX)
-    End Sub
   Partial Private Sub Insertprojx_status_desc(instance As projx_status_desc)
     End Sub
   Partial Private Sub Updateprojx_status_desc(instance As projx_status_desc)
     End Sub
   Partial Private Sub Deleteprojx_status_desc(instance As projx_status_desc)
+    End Sub
+  Partial Private Sub InsertprojX(instance As projX)
+    End Sub
+  Partial Private Sub UpdateprojX(instance As projX)
+    End Sub
+  Partial Private Sub DeleteprojX(instance As projX)
     End Sub
   #End Region
 	
@@ -106,15 +106,27 @@ Partial Public Class projXDataContext
 		End Get
 	End Property
 	
-	Public ReadOnly Property projXes() As System.Data.Linq.Table(Of projX)
-		Get
-			Return Me.GetTable(Of projX)
-		End Get
-	End Property
-	
 	Public ReadOnly Property projx_status_descs() As System.Data.Linq.Table(Of projx_status_desc)
 		Get
 			Return Me.GetTable(Of projx_status_desc)
+		End Get
+	End Property
+	
+	Public ReadOnly Property ProjX_segments() As System.Data.Linq.Table(Of ProjX_segment)
+		Get
+			Return Me.GetTable(Of ProjX_segment)
+		End Get
+	End Property
+	
+	Public ReadOnly Property ProjX_segment1s() As System.Data.Linq.Table(Of ProjX_segment1)
+		Get
+			Return Me.GetTable(Of ProjX_segment1)
+		End Get
+	End Property
+	
+	Public ReadOnly Property projXes() As System.Data.Linq.Table(Of projX)
+		Get
+			Return Me.GetTable(Of projX)
 		End Get
 	End Property
 End Class
@@ -544,6 +556,215 @@ Partial Public Class projx_action
 	End Sub
 End Class
 
+<Table(Name:="dbo.projx_status_desc")>  _
+Partial Public Class projx_status_desc
+	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	
+	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
+	
+	Private _projstatusid As Long
+	
+	Private _projstatusdesc As String
+	
+	Private _projXes As EntitySet(Of projX)
+	
+    #Region "Extensibility Method Definitions"
+    Partial Private Sub OnLoaded()
+    End Sub
+    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
+    End Sub
+    Partial Private Sub OnCreated()
+    End Sub
+    Partial Private Sub OnprojstatusidChanging(value As Long)
+    End Sub
+    Partial Private Sub OnprojstatusidChanged()
+    End Sub
+    Partial Private Sub OnprojstatusdescChanging(value As String)
+    End Sub
+    Partial Private Sub OnprojstatusdescChanged()
+    End Sub
+    #End Region
+	
+	Public Sub New()
+		MyBase.New
+		Me._projXes = New EntitySet(Of projX)(AddressOf Me.attach_projXes, AddressOf Me.detach_projXes)
+		OnCreated
+	End Sub
+	
+	<Column(Storage:="_projstatusid", AutoSync:=AutoSync.OnInsert, DbType:="BigInt NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
+	Public Property projstatusid() As Long
+		Get
+			Return Me._projstatusid
+		End Get
+		Set
+			If ((Me._projstatusid = value)  _
+						= false) Then
+				Me.OnprojstatusidChanging(value)
+				Me.SendPropertyChanging
+				Me._projstatusid = value
+				Me.SendPropertyChanged("projstatusid")
+				Me.OnprojstatusidChanged
+			End If
+		End Set
+	End Property
+	
+	<Column(Storage:="_projstatusdesc", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property projstatusdesc() As String
+		Get
+			Return Me._projstatusdesc
+		End Get
+		Set
+			If (String.Equals(Me._projstatusdesc, value) = false) Then
+				Me.OnprojstatusdescChanging(value)
+				Me.SendPropertyChanging
+				Me._projstatusdesc = value
+				Me.SendPropertyChanged("projstatusdesc")
+				Me.OnprojstatusdescChanged
+			End If
+		End Set
+	End Property
+	
+	<Association(Name:="projx_status_desc_projX", Storage:="_projXes", ThisKey:="projstatusid", OtherKey:="projstatusid")>  _
+	Public Property projXes() As EntitySet(Of projX)
+		Get
+			Return Me._projXes
+		End Get
+		Set
+			Me._projXes.Assign(value)
+		End Set
+	End Property
+	
+	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
+	
+	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+	
+	Protected Overridable Sub SendPropertyChanging()
+		If ((Me.PropertyChangingEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
+		End If
+	End Sub
+	
+	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
+		If ((Me.PropertyChangedEvent Is Nothing)  _
+					= false) Then
+			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
+		End If
+	End Sub
+	
+	Private Sub attach_projXes(ByVal entity As projX)
+		Me.SendPropertyChanging
+		entity.projx_status_desc = Me
+	End Sub
+	
+	Private Sub detach_projXes(ByVal entity As projX)
+		Me.SendPropertyChanging
+		entity.projx_status_desc = Nothing
+	End Sub
+End Class
+
+<Table(Name:="dbo.ProjX_segment")>  _
+Partial Public Class ProjX_segment
+	
+	Private _projid As Long
+	
+	Private _segmentname As String
+	
+	Private _segmentoptions As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Column(Storage:="_projid", DbType:="BigInt NOT NULL")>  _
+	Public Property projid() As Long
+		Get
+			Return Me._projid
+		End Get
+		Set
+			If ((Me._projid = value)  _
+						= false) Then
+				Me._projid = value
+			End If
+		End Set
+	End Property
+	
+	<Column(Storage:="_segmentname", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property segmentname() As String
+		Get
+			Return Me._segmentname
+		End Get
+		Set
+			If (String.Equals(Me._segmentname, value) = false) Then
+				Me._segmentname = value
+			End If
+		End Set
+	End Property
+	
+	<Column(Storage:="_segmentoptions", DbType:="VarChar(150)")>  _
+	Public Property segmentoptions() As String
+		Get
+			Return Me._segmentoptions
+		End Get
+		Set
+			If (String.Equals(Me._segmentoptions, value) = false) Then
+				Me._segmentoptions = value
+			End If
+		End Set
+	End Property
+End Class
+
+<Table(Name:="dbo.ProjX_segment")>  _
+Partial Public Class ProjX_segment1
+	
+	Private _projid As Long
+	
+	Private _segmentname As String
+	
+	Private _segmentoptions As String
+	
+	Public Sub New()
+		MyBase.New
+	End Sub
+	
+	<Column(Storage:="_projid", DbType:="BigInt NOT NULL")>  _
+	Public Property projid() As Long
+		Get
+			Return Me._projid
+		End Get
+		Set
+			If ((Me._projid = value)  _
+						= false) Then
+				Me._projid = value
+			End If
+		End Set
+	End Property
+	
+	<Column(Storage:="_segmentname", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
+	Public Property segmentname() As String
+		Get
+			Return Me._segmentname
+		End Get
+		Set
+			If (String.Equals(Me._segmentname, value) = false) Then
+				Me._segmentname = value
+			End If
+		End Set
+	End Property
+	
+	<Column(Storage:="_segmentoptions", DbType:="VarChar(150)")>  _
+	Public Property segmentoptions() As String
+		Get
+			Return Me._segmentoptions
+		End Get
+		Set
+			If (String.Equals(Me._segmentoptions, value) = false) Then
+				Me._segmentoptions = value
+			End If
+		End Set
+	End Property
+End Class
+
 <Table(Name:="dbo.projX")>  _
 Partial Public Class projX
 	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
@@ -571,6 +792,12 @@ Partial Public Class projX
 	Private _listoptions As String
 	
 	Private _projstatusid As System.Nullable(Of Long)
+	
+	Private _owner As String
+	
+	Private _listsegments As System.Nullable(Of Integer)
+	
+	Private _granid As System.Nullable(Of Integer)
 	
 	Private _projX_descs As EntitySet(Of projX_desc)
 	
@@ -628,6 +855,18 @@ Partial Public Class projX
     Partial Private Sub OnprojstatusidChanging(value As System.Nullable(Of Long))
     End Sub
     Partial Private Sub OnprojstatusidChanged()
+    End Sub
+    Partial Private Sub OnownerChanging(value As String)
+    End Sub
+    Partial Private Sub OnownerChanged()
+    End Sub
+    Partial Private Sub OnlistsegmentsChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OnlistsegmentsChanged()
+    End Sub
+    Partial Private Sub OngranidChanging(value As System.Nullable(Of Integer))
+    End Sub
+    Partial Private Sub OngranidChanged()
     End Sub
     #End Region
 	
@@ -819,6 +1058,54 @@ Partial Public Class projX
 		End Set
 	End Property
 	
+	<Column(Storage:="_owner", DbType:="VarChar(150)")>  _
+	Public Property owner() As String
+		Get
+			Return Me._owner
+		End Get
+		Set
+			If (String.Equals(Me._owner, value) = false) Then
+				Me.OnownerChanging(value)
+				Me.SendPropertyChanging
+				Me._owner = value
+				Me.SendPropertyChanged("owner")
+				Me.OnownerChanged
+			End If
+		End Set
+	End Property
+	
+	<Column(Storage:="_listsegments", DbType:="Int")>  _
+	Public Property listsegments() As System.Nullable(Of Integer)
+		Get
+			Return Me._listsegments
+		End Get
+		Set
+			If (Me._listsegments.Equals(value) = false) Then
+				Me.OnlistsegmentsChanging(value)
+				Me.SendPropertyChanging
+				Me._listsegments = value
+				Me.SendPropertyChanged("listsegments")
+				Me.OnlistsegmentsChanged
+			End If
+		End Set
+	End Property
+	
+	<Column(Storage:="_granid", DbType:="Int")>  _
+	Public Property granid() As System.Nullable(Of Integer)
+		Get
+			Return Me._granid
+		End Get
+		Set
+			If (Me._granid.Equals(value) = false) Then
+				Me.OngranidChanging(value)
+				Me.SendPropertyChanging
+				Me._granid = value
+				Me.SendPropertyChanged("granid")
+				Me.OngranidChanged
+			End If
+		End Set
+	End Property
+	
 	<Association(Name:="projX_projX_desc", Storage:="_projX_descs", ThisKey:="projid", OtherKey:="projid")>  _
 	Public Property projX_descs() As EntitySet(Of projX_desc)
 		Get
@@ -903,112 +1190,5 @@ Partial Public Class projX
 	Private Sub detach_projx_actions(ByVal entity As projx_action)
 		Me.SendPropertyChanging
 		entity.projX = Nothing
-	End Sub
-End Class
-
-<Table(Name:="dbo.projx_status_desc")>  _
-Partial Public Class projx_status_desc
-	Implements System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
-	
-	Private Shared emptyChangingEventArgs As PropertyChangingEventArgs = New PropertyChangingEventArgs(String.Empty)
-	
-	Private _projstatusid As Long
-	
-	Private _projstatusdesc As String
-	
-	Private _projXes As EntitySet(Of projX)
-	
-    #Region "Extensibility Method Definitions"
-    Partial Private Sub OnLoaded()
-    End Sub
-    Partial Private Sub OnValidate(action As System.Data.Linq.ChangeAction)
-    End Sub
-    Partial Private Sub OnCreated()
-    End Sub
-    Partial Private Sub OnprojstatusidChanging(value As Long)
-    End Sub
-    Partial Private Sub OnprojstatusidChanged()
-    End Sub
-    Partial Private Sub OnprojstatusdescChanging(value As String)
-    End Sub
-    Partial Private Sub OnprojstatusdescChanged()
-    End Sub
-    #End Region
-	
-	Public Sub New()
-		MyBase.New
-		Me._projXes = New EntitySet(Of projX)(AddressOf Me.attach_projXes, AddressOf Me.detach_projXes)
-		OnCreated
-	End Sub
-	
-	<Column(Storage:="_projstatusid", AutoSync:=AutoSync.OnInsert, DbType:="BigInt NOT NULL IDENTITY", IsPrimaryKey:=true, IsDbGenerated:=true)>  _
-	Public Property projstatusid() As Long
-		Get
-			Return Me._projstatusid
-		End Get
-		Set
-			If ((Me._projstatusid = value)  _
-						= false) Then
-				Me.OnprojstatusidChanging(value)
-				Me.SendPropertyChanging
-				Me._projstatusid = value
-				Me.SendPropertyChanged("projstatusid")
-				Me.OnprojstatusidChanged
-			End If
-		End Set
-	End Property
-	
-	<Column(Storage:="_projstatusdesc", DbType:="VarChar(50) NOT NULL", CanBeNull:=false)>  _
-	Public Property projstatusdesc() As String
-		Get
-			Return Me._projstatusdesc
-		End Get
-		Set
-			If (String.Equals(Me._projstatusdesc, value) = false) Then
-				Me.OnprojstatusdescChanging(value)
-				Me.SendPropertyChanging
-				Me._projstatusdesc = value
-				Me.SendPropertyChanged("projstatusdesc")
-				Me.OnprojstatusdescChanged
-			End If
-		End Set
-	End Property
-	
-	<Association(Name:="projx_status_desc_projX", Storage:="_projXes", ThisKey:="projstatusid", OtherKey:="projstatusid")>  _
-	Public Property projXes() As EntitySet(Of projX)
-		Get
-			Return Me._projXes
-		End Get
-		Set
-			Me._projXes.Assign(value)
-		End Set
-	End Property
-	
-	Public Event PropertyChanging As PropertyChangingEventHandler Implements System.ComponentModel.INotifyPropertyChanging.PropertyChanging
-	
-	Public Event PropertyChanged As PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
-	
-	Protected Overridable Sub SendPropertyChanging()
-		If ((Me.PropertyChangingEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanging(Me, emptyChangingEventArgs)
-		End If
-	End Sub
-	
-	Protected Overridable Sub SendPropertyChanged(ByVal propertyName As [String])
-		If ((Me.PropertyChangedEvent Is Nothing)  _
-					= false) Then
-			RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
-		End If
-	End Sub
-	
-	Private Sub attach_projXes(ByVal entity As projX)
-		Me.SendPropertyChanging
-		entity.projx_status_desc = Me
-	End Sub
-	
-	Private Sub detach_projXes(ByVal entity As projX)
-		Me.SendPropertyChanging
-		entity.projx_status_desc = Nothing
 	End Sub
 End Class

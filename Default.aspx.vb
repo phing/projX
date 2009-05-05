@@ -186,22 +186,75 @@ Partial Class _Default
         Dim newproject = New projX
         newproject.cid_email = drpClient.SelectedValue
         newproject.jobidQB = txtJobID.Text
-        newproject.listoptions = txt_listoptions.Text
         newproject.projname = lblProjName.Text
         newproject.projtypeid = rdo_ProjType.SelectedValue
         newproject.projStartDate = Now
         newproject.projReleaseDate = txtProjEndDate.Text
         newproject.projdir = lblProjDir.Text
         newproject.projstatusid = 1
+        newproject.listsegments = drp_list_segment.SelectedItem.Value
+        newproject.listoptions = txt_list_options.Text
+        newproject.owner = Request.ServerVariables("LOGON_USER")
         newproject.projmisc = txtProjMisc.Text
+
+        If LCase(Trim(rdoKeywordChoose.SelectedValue)) = "custom" Then
+
+        ElseIf LCase(Trim(rdoKeywordChoose.SelectedValue)) = "promo" Then
+            newproject.granid = 4
+        ElseIf rdoKeywordChoose.SelectedValue = "Choose Category" Then
+
+            If rdoKeyword.SelectedIndex <> -1 Then
+
+                newproject.granid = rdoKeyword.SelectedItem.Value
+            End If
+        End If
+
+
         projXdc.projXes.InsertOnSubmit(newproject)
         projXdc.SubmitChanges()
         Dim pLog = New projx_action
         pLog.actionid = 1
         pLog.timestamp = Now
         pLog.projid = newproject.projid
+
+ 
+
+
         projXdc.projx_actions.InsertOnSubmit(pLog)
         projXdc.SubmitChanges()
+
+
+        If chk_list_segment.Checked = True Then
+            For i As Integer = 1 To drp_list_segment.SelectedItem.Value
+                Dim segment = New ProjX_segment
+                segment.projid = newproject.projid
+
+                Dim c As Control
+                Dim curr_txt As TextBox = New TextBox
+                curr_txt.Text = ""
+                Dim curr_opt As TextBox = New TextBox
+                curr_opt.Text = ""
+
+                For Each c In ph_list_segments.Controls
+
+
+                    If c.ID = "txt_seg" & i Then
+                        curr_txt = c
+                    End If
+                    If c.ID = "txt_segopt" & i Then
+                        curr_opt = c
+                    End If
+
+
+                Next
+                segment.segmentname = curr_txt.Text
+                segment.segmentoptions = curr_opt.Text
+
+                '  segment.segmentname = ph_list_segments.Controls.
+            Next
+            
+        End If
+        
 		End Sub
 
     Protected Sub btnPdescShow_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnPdescShow.Click
@@ -212,4 +265,41 @@ Partial Class _Default
         chkProjDesc.Visible = False
     End Sub
 
+    Protected Sub drp_list_segment_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles drp_list_segment.SelectedIndexChanged
+        ph_list_segments.Controls.Clear()
+        For i As Integer = 1 To drp_list_segment.SelectedItem.Value
+
+            Dim l1 As New Label
+            l1.Text = "Segment " & i & " name: "
+            ph_list_segments.Controls.Add(l1)
+
+            Dim t As TextBox = New TextBox
+            t.ID = "txt_seg" & i
+            t.Text = "segment " & i & " name"
+            ph_list_segments.Controls.Add(t)
+
+            Dim spacer As LiteralControl = New LiteralControl("   Options:  ")
+            ph_list_segments.Controls.Add(spacer)
+
+
+            t = New TextBox
+            t.ID = "txt_segopt" & i
+            t.Text = ""
+            ph_list_segments.Controls.Add(t)
+
+            spacer = New LiteralControl("<br />")
+            ph_list_segments.Controls.Add(spacer)
+
+
+        Next
+
+    End Sub
+
+    Protected Sub chk_list_segment_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chk_list_segment.CheckedChanged
+        If chk_list_segment.Checked Then
+            drp_list_segment.Enabled = True
+        Else
+            drp_list_segment.Enabled = False
+        End If
+    End Sub
 End Class

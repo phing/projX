@@ -40,7 +40,9 @@
                         <font class="style2"> <span lang="en-us">ProjX</span></font><font class="mainheadfont"> </font>] :<span lang="en-us"> </span></div>
 					<br />
 					<div>
-					    <span lang="en-us"><a href="Default.aspx">Create a Project</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href="viewprojects.aspx">View Projects</a></span><br />
+					    <span lang="en-us">&nbsp;<a href="Default.aspx">Create a Project</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href="viewprojects.aspx">View Projects</a></span><br />
+                        <br />
+                        <span lang="en-us">&nbsp;User logged in: <% =Request.ServerVariables("LOGON_USER")%>  </span><br />
             </div>
         
         </asp:ContentPlaceHolder>

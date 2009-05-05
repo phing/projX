@@ -11,30 +11,34 @@
     DataKeyNames="projid" DataSourceID="SqlDataSource1" ForeColor="Black" 
     GridLines="Horizontal">
     <Columns>
-        <asp:CommandField ShowDeleteButton="false" ShowEditButton="false" 
-            ShowSelectButton="True" />
         <asp:BoundField DataField="projid" HeaderText="projid" InsertVisible="False" 
             ReadOnly="True" SortExpression="projid" />
+        <asp:BoundField DataField="clientname" HeaderText="clientname" 
+            SortExpression="clientname" />
         <asp:BoundField DataField="projname" HeaderText="projname" 
             SortExpression="projname" />
-        <asp:BoundField DataField="projdir" HeaderText="projdir" 
+        <asp:BoundField DataField="desc" HeaderText="desc" 
+            SortExpression="desc" />
+        <asp:BoundField DataField="projdir" HeaderText="projdir"  
             SortExpression="projdir" />
-        <asp:BoundField DataField="projtypeid" HeaderText="projtypeid" 
-            SortExpression="projtypeid" />
         <asp:BoundField DataField="projReleaseDate" HeaderText="projReleaseDate" 
             SortExpression="projReleaseDate" />
         <asp:BoundField DataField="projStartDate" HeaderText="projStartDate" 
             SortExpression="projStartDate" />
-        <asp:BoundField DataField="cid_email" HeaderText="cid_email" 
-            SortExpression="cid_email" />
         <asp:BoundField DataField="jobidQB" HeaderText="jobidQB" 
             SortExpression="jobidQB" />
         <asp:BoundField DataField="projmisc" HeaderText="projmisc" 
             SortExpression="projmisc" />
         <asp:BoundField DataField="listoptions" HeaderText="listoptions" 
             SortExpression="listoptions" />
-        <asp:BoundField DataField="projstatusid" HeaderText="projstatusid" 
-            SortExpression="projstatusid" />
+        <asp:BoundField DataField="owner" HeaderText="owner" 
+            SortExpression="owner" />
+        <asp:BoundField DataField="listsegments" HeaderText="listsegments" 
+            SortExpression="listsegments" />
+        <asp:BoundField DataField="projtype_desc" HeaderText="projtype_desc" 
+            SortExpression="projtype_desc" />
+        <asp:BoundField DataField="projstatusdesc" HeaderText="projstatusdesc" 
+            SortExpression="projstatusdesc" />
     </Columns>
     <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
     <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
@@ -48,8 +52,10 @@
     DeleteCommand="DELETE FROM [projX] WHERE [projid] = @original_projid AND (([projname] = @original_projname) OR ([projname] IS NULL AND @original_projname IS NULL)) AND (([projdir] = @original_projdir) OR ([projdir] IS NULL AND @original_projdir IS NULL)) AND (([projtypeid] = @original_projtypeid) OR ([projtypeid] IS NULL AND @original_projtypeid IS NULL)) AND (([projReleaseDate] = @original_projReleaseDate) OR ([projReleaseDate] IS NULL AND @original_projReleaseDate IS NULL)) AND (([projStartDate] = @original_projStartDate) OR ([projStartDate] IS NULL AND @original_projStartDate IS NULL)) AND (([cid_email] = @original_cid_email) OR ([cid_email] IS NULL AND @original_cid_email IS NULL)) AND (([jobidQB] = @original_jobidQB) OR ([jobidQB] IS NULL AND @original_jobidQB IS NULL)) AND (([projmisc] = @original_projmisc) OR ([projmisc] IS NULL AND @original_projmisc IS NULL)) AND (([listoptions] = @original_listoptions) OR ([listoptions] IS NULL AND @original_listoptions IS NULL)) AND (([projstatusid] = @original_projstatusid) OR ([projstatusid] IS NULL AND @original_projstatusid IS NULL))" 
     InsertCommand="INSERT INTO [projX] ([projname], [projdir], [projtypeid], [projReleaseDate], [projStartDate], [cid_email], [jobidQB], [projmisc], [listoptions], [projstatusid]) VALUES (@projname, @projdir, @projtypeid, @projReleaseDate, @projStartDate, @cid_email, @jobidQB, @projmisc, @listoptions, @projstatusid)" 
     OldValuesParameterFormatString="original_{0}" 
-    SelectCommand="SELECT * FROM [projX]" 
-    UpdateCommand="UPDATE [projX] SET [projname] = @projname, [projdir] = @projdir, [projtypeid] = @projtypeid, [projReleaseDate] = @projReleaseDate, [projStartDate] = @projStartDate, [cid_email] = @cid_email, [jobidQB] = @jobidQB, [projmisc] = @projmisc, [listoptions] = @listoptions, [projstatusid] = @projstatusid WHERE [projid] = @original_projid AND (([projname] = @original_projname) OR ([projname] IS NULL AND @original_projname IS NULL)) AND (([projdir] = @original_projdir) OR ([projdir] IS NULL AND @original_projdir IS NULL)) AND (([projtypeid] = @original_projtypeid) OR ([projtypeid] IS NULL AND @original_projtypeid IS NULL)) AND (([projReleaseDate] = @original_projReleaseDate) OR ([projReleaseDate] IS NULL AND @original_projReleaseDate IS NULL)) AND (([projStartDate] = @original_projStartDate) OR ([projStartDate] IS NULL AND @original_projStartDate IS NULL)) AND (([cid_email] = @original_cid_email) OR ([cid_email] IS NULL AND @original_cid_email IS NULL)) AND (([jobidQB] = @original_jobidQB) OR ([jobidQB] IS NULL AND @original_jobidQB IS NULL)) AND (([projmisc] = @original_projmisc) OR ([projmisc] IS NULL AND @original_projmisc IS NULL)) AND (([listoptions] = @original_listoptions) OR ([listoptions] IS NULL AND @original_listoptions IS NULL)) AND (([projstatusid] = @original_projstatusid) OR ([projstatusid] IS NULL AND @original_projstatusid IS NULL))">
+    SelectCommand="SELECT projX.projid, clients.clientname, projX.projname, mailingtype_gran.[desc], projX.projdir, projX.projReleaseDate, projX.projStartDate, projX.jobidQB, projX.projmisc, projX.listoptions, projX.owner, projX.listsegments, project_types.projtype_desc, projx_status_desc.projstatusdesc FROM projX INNER JOIN clients ON projX.cid_email = clients.cid_email INNER JOIN project_types ON projX.projtypeid = project_types.projtypeid INNER JOIN projx_status_desc ON projX.projstatusid = projx_status_desc.projstatusid INNER JOIN mailingtype_gran ON projX.granid = mailingtype_gran.granid" 
+    
+        
+        UpdateCommand="UPDATE [projX] SET [projname] = @projname, [projdir] = @projdir, [projtypeid] = @projtypeid, [projReleaseDate] = @projReleaseDate, [projStartDate] = @projStartDate, [cid_email] = @cid_email, [jobidQB] = @jobidQB, [projmisc] = @projmisc, [listoptions] = @listoptions, [projstatusid] = @projstatusid WHERE [projid] = @original_projid AND (([projname] = @original_projname) OR ([projname] IS NULL AND @original_projname IS NULL)) AND (([projdir] = @original_projdir) OR ([projdir] IS NULL AND @original_projdir IS NULL)) AND (([projtypeid] = @original_projtypeid) OR ([projtypeid] IS NULL AND @original_projtypeid IS NULL)) AND (([projReleaseDate] = @original_projReleaseDate) OR ([projReleaseDate] IS NULL AND @original_projReleaseDate IS NULL)) AND (([projStartDate] = @original_projStartDate) OR ([projStartDate] IS NULL AND @original_projStartDate IS NULL)) AND (([cid_email] = @original_cid_email) OR ([cid_email] IS NULL AND @original_cid_email IS NULL)) AND (([jobidQB] = @original_jobidQB) OR ([jobidQB] IS NULL AND @original_jobidQB IS NULL)) AND (([projmisc] = @original_projmisc) OR ([projmisc] IS NULL AND @original_projmisc IS NULL)) AND (([listoptions] = @original_listoptions) OR ([listoptions] IS NULL AND @original_listoptions IS NULL)) AND (([projstatusid] = @original_projstatusid) OR ([projstatusid] IS NULL AND @original_projstatusid IS NULL))">
     <DeleteParameters>
         <asp:Parameter Name="original_projid" Type="Int64" />
         <asp:Parameter Name="original_projname" Type="String" />

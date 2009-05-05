@@ -22,8 +22,10 @@
          <span lang="en-us">This project is currently in Beta Testing and should be 
 		used carefully and everything should be verified if you use it.<br />
     <br />
-    </span>User: <br /> <%=System.Security.Principal.WindowsIdentity.GetCurrent.Name() %>
-        <br />
+    </span>
+    
+
+   
         
      
          <br />
@@ -278,13 +280,9 @@
                     </td>
                 </tr>
                 <tr>
+                    
                     <td>
-                        List Options (segment...) :<span lang="en-us"></span>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txt_listoptions" runat="server" Wrap="true" Width="240px" 
-                            Height="70px"></asp:TextBox>
-                    </td>
+                        &nbsp;</td>
                 </tr>
             </caption>
             
@@ -292,10 +290,59 @@
         </td>
         </tr>
         </table>
-        
         <br />
-        </ContentTemplate>
+              </ContentTemplate>
             </asp:UpdatePanel>
+        
+        
+        <b>List Options:</b>
+        
+        <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Always">
+               <ContentTemplate>
+&nbsp;<table width="400px">
+            <tr>
+            <td>
+                    Special List Options:
+                </td>
+                <td>
+                <asp:TextBox ID="txt_list_options" Text="" runat="server" Height="55px" 
+                        Width="174px"></asp:TextBox>
+                </td></tr><tr>
+                <td>
+                    Segment:
+                </td>
+                <td>
+                    <asp:CheckBox ID="chk_list_segment" runat="server" AutoPostBack="True" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lbl_list_segment" runat="server" Text="Number of Segments: "></asp:Label>
+                </td>
+                <td>
+                    <asp:DropDownList Enabled="false" ID="drp_list_segment" runat="server" 
+                        AutoPostBack="True" >
+
+                         <asp:ListItem Value="1" Text="1 - No Segments" Selected="true"></asp:ListItem>
+                         <asp:ListItem Value="2" Text="2"></asp:ListItem>
+                         <asp:ListItem Value="3" Text="3"></asp:ListItem>
+                         <asp:ListItem Value="4" Text="4"></asp:ListItem>
+                         <asp:ListItem Value="5" Text="5"></asp:ListItem>
+                         <asp:ListItem Value="6" Text="6"></asp:ListItem>
+                         <asp:ListItem Value="7" Text="7"></asp:ListItem>
+                       </asp:DropDownList>
+                </td>
+            </tr>
+          </table>
+               
+                <asp:PlaceHolder ID="ph_list_segments" runat="server"></asp:PlaceHolder>
+           
+       
+             </ContentTemplate> 
+             
+             </asp:UpdatePanel>   
+        <br />
+  
         
             <asp:Panel ID="Panel2" runat="server">
             
@@ -380,6 +427,10 @@
         .style3
         {
             width: 156px;
+        }
+        .style4
+        {
+            margin-left: 0px;
         }
     </style>
 

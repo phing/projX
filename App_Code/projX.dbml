@@ -25,6 +25,29 @@
       <Association Name="projX_projx_action" Member="projX" ThisKey="projid" OtherKey="projid" Type="projX" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.projx_status_desc" Member="projx_status_descs">
+    <Type Name="projx_status_desc">
+      <Column Name="projstatusid" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="projstatusdesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="projx_status_desc_projX" Member="projXes" ThisKey="projstatusid" OtherKey="projstatusid" Type="projX" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjX_segment" Member="ProjX_segments">
+    <Type Name="ProjX_segment">
+      <Column Name="projid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="segmentname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="segmentoptions" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="projX_ProjX_segment" Member="projX" ThisKey="projid" OtherKey="projid" Type="projX" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProjX_segment" Member="ProjX_segment1s">
+    <Type Name="ProjX_segment1">
+      <Column Name="projid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="segmentname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="segmentoptions" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="projX_ProjX_segment1" Member="projX" ThisKey="projid" OtherKey="projid" Type="projX" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.projX" Member="projXes">
     <Type Name="projX">
       <Column Name="projid" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -38,16 +61,14 @@
       <Column Name="projmisc" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="listoptions" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
       <Column Name="projstatusid" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="owner" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="listsegments" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="granid" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="projX_projX_desc" Member="projX_descs" ThisKey="projid" OtherKey="projid" Type="projX_desc" />
       <Association Name="projX_projx_action" Member="projx_actions" ThisKey="projid" OtherKey="projid" Type="projx_action" />
+      <Association Name="projX_ProjX_segment" Member="ProjX_segments" ThisKey="projid" OtherKey="projid" Type="ProjX_segment" />
+      <Association Name="projX_ProjX_segment1" Member="ProjX_segment1s" ThisKey="projid" OtherKey="projid" Type="ProjX_segment1" />
       <Association Name="projx_status_desc_projX" Member="projx_status_desc" ThisKey="projstatusid" OtherKey="projstatusid" Type="projx_status_desc" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.projx_status_desc" Member="projx_status_descs">
-    <Type Name="projx_status_desc">
-      <Column Name="projstatusid" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="projstatusdesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="projx_status_desc_projX" Member="projXes" ThisKey="projstatusid" OtherKey="projstatusid" Type="projX" />
     </Type>
   </Table>
 </Database>
