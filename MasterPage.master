@@ -1,0 +1,58 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Marketing Admin System</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+		<style type="text/css">
+			.style1
+			{
+				border: 1px solid #2F4F4F;
+				color: white;
+				background-color: #2E4d7B;
+				font-family: Arial, Sans-Serif;
+				font-size: 12px;
+				font-weight: bold;
+				padding: 5px;
+				margin-top: 1px;
+				cursor: pointer;
+				width: 1000px;
+			}
+	        .style2
+            {
+                font-size:18px;
+                font-weight: bold;
+                color: #FFFF00;
+            }
+	</style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        	<div class="style1">
+						<span lang="en-us">: </span>[<font class="mainheadfont"> </font>
+                        <font class="style2"> <span lang="en-us">ProjX</span></font><font class="mainheadfont"> </font>] :<span lang="en-us"> </span></div>
+					<br />
+					<div>
+					    <span lang="en-us"><a href="Default.aspx">Create a Project</a>&nbsp;&nbsp; |&nbsp;&nbsp;<a href="viewprojects.aspx">View Projects</a></span><br />
+            </div>
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    <div>
+			<asp:ContentPlaceHolder ID="MainContent" runat="server">
+			</asp:ContentPlaceHolder>
+    </div>
+                <div class="style1">
+                &nbsp;Any questions, comments, bugs? email: Randall Amiel [ randall.amiel@destinationrewards.com
+                ]  </div>
+                <br />
+    </form>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="email_metrics" Class="mailingtypesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MARKETINGDB;Initial Catalog=email_metrics;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="email_metricsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.mailingtype_desc_mailing" Member="mailingtype_desc_mailings">
+    <Type Name="mailingtype_desc_mailing">
+      <Column Name="mailing_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="descid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="mailingtype_desc_type_mailingtype_desc_mailing" Member="mailingtype_desc_type" ThisKey="descid" OtherKey="descid" Type="mailingtype_desc_type" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mailingtype_parse" Member="mailingtype_parses">
+    <Type Name="mailingtype_parse">
+      <Column Name="parseid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="granid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="precedence" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="parsename" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Association Name="mailingtype_gran_mailingtype_parse" Member="mailingtype_gran" ThisKey="granid" OtherKey="granid" Type="mailingtype_gran" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mailingtype_desc_types" Member="mailingtype_desc_types">
+    <Type Name="mailingtype_desc_type">
+      <Column Name="descid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="[desc]" Member="desc" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="mailingtype_desc_type_mailingtype_desc_mailing" Member="mailingtype_desc_mailings" ThisKey="descid" OtherKey="descid" Type="mailingtype_desc_mailing" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mailingtype_group_gran" Member="mailingtype_group_grans">
+    <Type Name="mailingtype_group_gran">
+      <Column Name="groupid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="granid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="mailingtype_group_type_mailingtype_group_gran" Member="mailingtype_group_type" ThisKey="groupid" OtherKey="groupid" Type="mailingtype_group_type" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="mailingtype_gran_mailingtype_group_gran" Member="mailingtype_gran" ThisKey="granid" OtherKey="granid" Type="mailingtype_gran" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mailingtype_group_type" Member="mailingtype_group_types">
+    <Type Name="mailingtype_group_type">
+      <Column Name="groupid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[desc]" Member="desc" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="color" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Association Name="mailingtype_group_type_mailingtype_group_gran" Member="mailingtype_group_grans" ThisKey="groupid" OtherKey="groupid" Type="mailingtype_group_gran" />
+      <Association Name="mailingtype_group_type_mailingtype_override" Member="mailingtype_overrides" ThisKey="groupid" OtherKey="groupid" Type="mailingtype_override" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mailingtype_override" Member="mailingtype_overrides">
+    <Type Name="mailingtype_override">
+      <Column Name="mailing_id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="granid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="groupid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="mailingtype_group_type_mailingtype_override" Member="mailingtype_group_type" ThisKey="groupid" OtherKey="groupid" Type="mailingtype_group_type" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="mailingtype_gran_mailingtype_override" Member="mailingtype_gran" ThisKey="granid" OtherKey="granid" Type="mailingtype_gran" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.clients" Member="clients">
+    <Type Name="client">
+      <Column Name="clientname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cid" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cid_email" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="client_clients_abbr" Member="clients_abbrs" ThisKey="cid_email" OtherKey="cid_email" Type="clients_abbr" />
+    </Type>
+  </Table>
+  <Table Name="dbo.clients_abbr" Member="clients_abbrs">
+    <Type Name="clients_abbr">
+      <Column Name="cid_email" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="abbr" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="client_clients_abbr" Member="client" ThisKey="cid_email" OtherKey="cid_email" Type="client" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mailingtype_gran" Member="mailingtype_grans">
+    <Type Name="mailingtype_gran">
+      <Column Name="granid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[desc]" Member="desc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="mailingtype_gran_mailingtype_parse" Member="mailingtype_parses" ThisKey="granid" OtherKey="granid" Type="mailingtype_parse" />
+      <Association Name="mailingtype_gran_mailingtype_group_gran" Member="mailingtype_group_grans" ThisKey="granid" OtherKey="granid" Type="mailingtype_group_gran" />
+      <Association Name="mailingtype_gran_mailingtype_override" Member="mailingtype_overrides" ThisKey="granid" OtherKey="granid" Type="mailingtype_override" />
+    </Type>
+  </Table>
+</Database>

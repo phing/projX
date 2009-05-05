@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="email_metrics" Class="projXDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=MARKETINGDB;Initial Catalog=email_metrics;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="email_metricsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.projX_desc" Member="projX_descs">
+    <Type Name="projX_desc">
+      <Column Name="projid" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="descid" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="projX_projX_desc" Member="projX" ThisKey="projid" OtherKey="projid" Type="projX" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.projx_actions_desc" Member="projx_actions_descs">
+    <Type Name="projx_actions_desc">
+      <Column Name="actionid" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="actionname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="projx_actions_desc_projx_action" Member="projx_actions" ThisKey="actionid" OtherKey="actionid" Type="projx_action" />
+    </Type>
+  </Table>
+  <Table Name="dbo.projx_actions" Member="projx_actions">
+    <Type Name="projx_action">
+      <Column Name="projid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="actionid" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="proactid" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="projx_actions_desc_projx_action" Member="projx_actions_desc" ThisKey="actionid" OtherKey="actionid" Type="projx_actions_desc" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="projX_projx_action" Member="projX" ThisKey="projid" OtherKey="projid" Type="projX" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.projX" Member="projXes">
+    <Type Name="projX">
+      <Column Name="projid" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="projname" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="projdir" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="projtypeid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="projReleaseDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="projStartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="cid_email" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="jobidQB" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="projmisc" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="listoptions" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="projstatusid" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="projX_projX_desc" Member="projX_descs" ThisKey="projid" OtherKey="projid" Type="projX_desc" />
+      <Association Name="projX_projx_action" Member="projx_actions" ThisKey="projid" OtherKey="projid" Type="projx_action" />
+      <Association Name="projx_status_desc_projX" Member="projx_status_desc" ThisKey="projstatusid" OtherKey="projstatusid" Type="projx_status_desc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.projx_status_desc" Member="projx_status_descs">
+    <Type Name="projx_status_desc">
+      <Column Name="projstatusid" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="projstatusdesc" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="projx_status_desc_projX" Member="projXes" ThisKey="projstatusid" OtherKey="projstatusid" Type="projX" />
+    </Type>
+  </Table>
+</Database>

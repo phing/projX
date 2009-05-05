@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.75, 8.5" name="DB-mailingtypes">
+  <DataContextMoniker Name="/mailingtypesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="7ca70da1-9fff-481e-a587-e44b98bdb97a" absoluteBounds="9.5, 0.875, 2, 1.0961531575520835">
+      <DataClassMoniker Name="/mailingtypesDataContext/mailingtype_desc_mailing" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f7008c26-eab7-41f0-9e61-d26635537cb5" absoluteBounds="9.515, 1.335, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ff5d7f32-b951-4590-9807-b3cee56b88a7" absoluteBounds="3.5, 6.875, 2, 1.4248478190104166">
+      <DataClassMoniker Name="/mailingtypesDataContext/mailingtype_parse" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f5db4589-45ba-4afb-8977-8820db82374c" absoluteBounds="3.515, 7.335, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3800159c-b7d5-4b0a-af94-15629470ccec" absoluteBounds="6.75, 0.875, 2, 1.0961531575520835">
+      <DataClassMoniker Name="/mailingtypesDataContext/mailingtype_desc_type" />
+      <nestedChildShapes>
+        <elementListCompartment Id="406a3911-f47a-4e29-aa3e-3c585216b3a9" absoluteBounds="6.765, 1.335, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="92e8cc94-e569-4416-8688-a80dccd884f9" absoluteBounds="3.5, 3.125, 2, 1.0961531575520835">
+      <DataClassMoniker Name="/mailingtypesDataContext/mailingtype_group_gran" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c7741f68-cf41-4051-b434-d8d9be4693fa" absoluteBounds="3.515, 3.585, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="58664e76-e084-43da-bc13-9546b436f423" absoluteBounds="0.75, 1.125, 2, 1.2605004882812498">
+      <DataClassMoniker Name="/mailingtypesDataContext/mailingtype_group_type" />
+      <nestedChildShapes>
+        <elementListCompartment Id="57bc529d-7f2a-4d27-8e45-7b3133cb8a74" absoluteBounds="0.765, 1.585, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4bbcf5ca-d2db-41ea-bb54-091f8c7b7ba9" absoluteBounds="3.5, 1.125, 2, 1.2605004882812498">
+      <DataClassMoniker Name="/mailingtypesDataContext/mailingtype_override" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a3e5cc88-f895-4e67-8e82-71a9fcb6b864" absoluteBounds="3.515, 1.585, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.75 : 1.42307657877604); (9.5 : 1.42307657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/mailingtypesDataContext/mailingtype_desc_type/mailingtype_desc_type_mailingtype_desc_mailing" />
+      <nodes>
+        <classShapeMoniker Id="3800159c-b7d5-4b0a-af94-15629470ccec" />
+        <classShapeMoniker Id="7ca70da1-9fff-481e-a587-e44b98bdb97a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.38550048828125); (3.5 : 3.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/mailingtypesDataContext/mailingtype_group_type/mailingtype_group_type_mailingtype_group_gran" />
+      <nodes>
+        <classShapeMoniker Id="58664e76-e084-43da-bc13-9546b436f423" />
+        <classShapeMoniker Id="92e8cc94-e569-4416-8688-a80dccd884f9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.72399774414063); (3.5 : 1.72399774414063)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/mailingtypesDataContext/mailingtype_group_type/mailingtype_group_type_mailingtype_override" />
+      <nodes>
+        <classShapeMoniker Id="58664e76-e084-43da-bc13-9546b436f423" />
+        <classShapeMoniker Id="4bbcf5ca-d2db-41ea-bb54-091f8c7b7ba9" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="82362ff7-128f-4c50-9a60-c3f76da3cc5c" absoluteBounds="6.375, 2.875, 2, 1.2605004882812505">
+      <DataClassMoniker Name="/mailingtypesDataContext/client" />
+      <nestedChildShapes>
+        <elementListCompartment Id="515035cc-ae0f-411f-84e4-63376e1890bc" absoluteBounds="6.39, 3.335, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e64e9810-6e52-4efd-801b-691ffb56a48a" absoluteBounds="9.125, 3, 2, 1.0961531575520831">
+      <DataClassMoniker Name="/mailingtypesDataContext/clients_abbr" />
+      <nestedChildShapes>
+        <elementListCompartment Id="922e40d6-9acf-438f-b240-84a17fdcfbf9" absoluteBounds="9.14, 3.46, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.375 : 3.54807657877604); (9.125 : 3.54807657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/mailingtypesDataContext/client/client_clients_abbr" />
+      <nodes>
+        <classShapeMoniker Id="82362ff7-128f-4c50-9a60-c3f76da3cc5c" />
+        <classShapeMoniker Id="e64e9810-6e52-4efd-801b-691ffb56a48a" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="1d4941b6-118d-4bd1-8ba9-2c04d80c41fb" absoluteBounds="4.375, 5.25, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/mailingtypesDataContext/mailingtype_gran" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7e8b614f-9179-4589-af1a-d88dd58f2fa4" absoluteBounds="4.39, 5.71, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.9375 : 6.34615315755208); (4.9375 : 6.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/mailingtypesDataContext/mailingtype_gran/mailingtype_gran_mailingtype_parse" />
+      <nodes>
+        <classShapeMoniker Id="1d4941b6-118d-4bd1-8ba9-2c04d80c41fb" />
+        <classShapeMoniker Id="ff5d7f32-b951-4590-9807-b3cee56b88a7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.9375 : 5.25); (4.9375 : 4.22115315755208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/mailingtypesDataContext/mailingtype_gran/mailingtype_gran_mailingtype_group_gran" />
+      <nodes>
+        <classShapeMoniker Id="1d4941b6-118d-4bd1-8ba9-2c04d80c41fb" />
+        <classShapeMoniker Id="92e8cc94-e569-4416-8688-a80dccd884f9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.9062505 : 5.25); (5.9062505 : 1.75525024414062); (5.5 : 1.75525024414062)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/mailingtypesDataContext/mailingtype_gran/mailingtype_gran_mailingtype_override" />
+      <nodes>
+        <classShapeMoniker Id="1d4941b6-118d-4bd1-8ba9-2c04d80c41fb" />
+        <classShapeMoniker Id="4bbcf5ca-d2db-41ea-bb54-091f8c7b7ba9" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
