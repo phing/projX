@@ -72,7 +72,40 @@
         
         <hr align="left" class="thin" style="width: 950px" />
         
+          <asp:Panel ID="pnl_projecttype" runat="server" CssClass="squareboxgradientcaption"  >
+                <asp:Image ID="img_projecttype" runat="server" />  
+               <b>Project Type :  </b>
+                <asp:Label runat="server" ID="lbl_projecttype"></asp:Label>
+          </asp:Panel>
+          
+          <cc1:CollapsiblePanelExtender 
+                ID="CollapsiblePanelExtender2"
+                TargetControlID="pnl_projecttype_collapse"
+                
+                Collapsed="true" 
+
+                ExpandControlID="img_projecttype"
+                CollapseControlID="img_projecttype"
+                TextLabelID="lbl_projecttype"
+                ImageControlID="img_projecttype"
+                
+                runat="server"
+                CollapsedSize="0"                
+                AutoCollapse="False"
+                AutoExpand="False"
+                ScrollContents="false"
+                CollapsedText="Show Details..."
+                ExpandedText="Hide Details" 
+                ExpandedImage="~/images/collapse.jpg"
+                CollapsedImage="~/images/expand.jpg"
+                ExpandDirection="Vertical" />
+          </cc1:CollapsiblePanelExtender>
+          
         
+        
+        <asp:Panel ID="pnl_projecttype_collapse" runat="server" CssClass="squarebox"> 
+        
+        <div class="squareboxcontent">
         
         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
             <ContentTemplate>
@@ -80,9 +113,9 @@
         <br />
         <table>
             <tr>
-                <td>
-                    <b>Project Type:</b>
-                </td>
+            <td>
+                <b>Project Type:</b> 
+            </td>
             </tr>
             <tr>
                 <td>
@@ -143,8 +176,9 @@
                                 BorderColor="Black" BorderStyle="Solid" BorderWidth="1px"
                                 Width="200px" Style="margin-bottom: 0px" AutoPostBack="True" 
                                 CausesValidation="True"></asp:TextBox>
+                        
                             <cc1:TextBoxWatermarkExtender WatermarkText="Type in a Custom Keyword" ID="TextBox1_TextBoxWatermarkExtender"
-                                runat="server" TargetControlID="txtBoxKeyword">
+                                runat="server"  TargetControlID="txtBoxKeyword">
                             </cc1:TextBoxWatermarkExtender>
                             <asp:RadioButtonList ID="rdoKeyword" runat="server" AutoPostBack="True" BackColor="#FFFFcc"
                                 BorderColor="Black" BorderStyle="Solid" BorderWidth="1px" DataSourceID="mailingtypes"
@@ -172,28 +206,104 @@
         </asp:UpdatePanel>
   
         
+     
         
-        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-        <ContentTemplate>
-         
-        <br />
-        <b>Project Descriptors:&nbsp;
-        <asp:Button ID="btnPdescShow" runat="server" BackColor="White" Text="Show" 
-                CausesValidation="False" UseSubmitBehavior="False" />
-&nbsp; </b>/         <b>&nbsp;
-        <asp:Button ID="btnPdescHide" runat="server" BackColor="White" Text="Hide" 
-                CausesValidation="False" UseSubmitBehavior="False" />
-        <br />
-        </b>
+        
+     </div>   
+    </asp:Panel>
+    
+    
+    
+    
+     <br />
+     <asp:Panel ID="pnl_projdesc" runat="server" CssClass="squareboxgradientcaption"  >
+                <asp:Image ID="img_projdesc" runat="server" />  
+                <b>Project Descriptors:&nbsp;</b> 
+                <asp:Label runat="server" ID="lbl_projdesc"></asp:Label>
+          </asp:Panel>
+          
+          <cc1:CollapsiblePanelExtender 
+                ID="CollapsiblePanelExtender3"
+                TargetControlID="pnl_projdesc_collapse"
+                
+                Collapsed="false" 
+
+                ExpandControlID="img_projdesc"
+                CollapseControlID="img_projdesc"
+                TextLabelID="lbl_projdesc"
+                ImageControlID="img_projdesc"
+                
+                runat="server"
+                CollapsedSize="0"                
+                AutoCollapse="False"
+                AutoExpand="False"
+                ScrollContents="false"
+                CollapsedText="Show Details..."
+                ExpandedText="Hide Details" 
+                ExpandedImage="~/images/collapse.jpg"
+                CollapsedImage="~/images/expand.jpg"
+                ExpandDirection="Vertical" />
+          </cc1:CollapsiblePanelExtender>
+        
+        
+        <asp:Panel ID="pnl_projdesc_collapse" runat="server" CssClass="squarebox">
+        <div class="squareboxcontent">
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Always">
+               <ContentTemplate>
+     
+     
+        
+               
         <asp:CheckBoxList ID="chkProjDesc" runat="server" 
             DataSourceID="sqlProjDesc" DataTextField="desc" DataValueField="descid" 
-                Visible="False" CellPadding="2" CellSpacing="2" DataMember="DefaultView" 
-                RepeatColumns="5">
+                Visible="true" CellPadding="2" CellSpacing="2" DataMember="DefaultView" 
+                RepeatColumns="7">
         </asp:CheckBoxList>
-        </ContentTemplate>
-        </asp:UpdatePanel>
-        
+    
+       
+         </ContentTemplate>
+         </asp:UpdatePanel>
+         </div>
+         
+         </asp:Panel>
+       
+       
+       
         <br />
+          <asp:Panel ID="pnl_projdetails" runat="server" CssClass="squareboxgradientcaption"  >
+                <asp:Image ID="img_projdetails" runat="server" />  
+                <b> Project Details  :  </b>
+                <asp:Label runat="server" ID="lbl_projdetails"></asp:Label>
+          </asp:Panel>
+          
+          <cc1:CollapsiblePanelExtender 
+                ID="CollapsiblePanelExtender4"
+                TargetControlID="pnl_listoptions_collapse"
+                
+                Collapsed="false" 
+
+                ExpandControlID="img_projdetails"
+                CollapseControlID="img_projdetails"
+                TextLabelID="lbl_projdetails"
+                ImageControlID="img_projdetails"
+                
+                runat="server"
+                CollapsedSize="0"                
+                AutoCollapse="False"
+                AutoExpand="False"
+                ScrollContents="false"
+                CollapsedText="Show Details..."
+                ExpandedText="Hide Details" 
+                ExpandedImage="~/images/collapse.jpg"
+                CollapsedImage="~/images/expand.jpg"
+                ExpandDirection="Vertical" />
+          </cc1:CollapsiblePanelExtender>
+        
+        
+        <asp:Panel ID="pnl_projdetails_collapse" runat="server" CssClass="squarebox">
+        <div class="squareboxcontent">
+        
+        
         <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Always">
             <ContentTemplate>
                 <br />
@@ -225,8 +335,7 @@
                     
                 </td>
             </tr>
-            <caption>
-                <br />
+      
                 <tr>
                     <td>
                         Common Client:<span lang="en-us">(disabled)</span>
@@ -294,21 +403,56 @@
               </ContentTemplate>
             </asp:UpdatePanel>
         
+        </div>
         
-        <b>List Options:</b>
+        </asp:Panel>
         
+          <asp:Panel ID="pnl_listoptions" runat="server" CssClass="squareboxgradientcaption"  >
+                <asp:Image ID="img_listoptions" runat="server" />  
+                List Options :  
+                <asp:Label runat="server" ID="lbl_listoptions"></asp:Label>
+          </asp:Panel>
+          
+          <cc1:CollapsiblePanelExtender 
+                ID="CollapsiblePanelExtender1"
+                TargetControlID="pnl_listoptions_collapse"
+                
+                Collapsed="false" 
+
+                ExpandControlID="img_listoptions"
+                CollapseControlID="img_listoptions"
+                TextLabelID="lbl_listoptions"
+                ImageControlID="img_listoptions"
+                
+                runat="server"
+                CollapsedSize="0"                
+                AutoCollapse="False"
+                AutoExpand="False"
+                ScrollContents="false"
+                CollapsedText="Show Details..."
+                ExpandedText="Hide Details" 
+                ExpandedImage="~/images/collapse.jpg"
+                CollapsedImage="~/images/expand.jpg"
+                ExpandDirection="Vertical" />
+          </cc1:CollapsiblePanelExtender>
+        
+        
+        <asp:Panel ID="pnl_listoptions_collapse" runat="server" CssClass="squarebox">
+        <div class="squareboxcontent">
         <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Always">
                <ContentTemplate>
-&nbsp;<table width="400px">
+          
+&nbsp;<table width="800px">
             <tr>
-            <td>
+            <td class="style6">
+
                     Special List Options:
                 </td>
                 <td>
                 <asp:TextBox ID="txt_list_options" Text="" runat="server" Height="55px" 
                         Width="174px"></asp:TextBox>
                 </td></tr><tr>
-                <td>
+                <td class="style6">
                     Segment:
                 </td>
                 <td>
@@ -316,7 +460,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td class="style6">
                     <asp:Label ID="lbl_list_segment" runat="server" Text="Number of Segments: "></asp:Label>
                 </td>
                 <td>
@@ -340,7 +484,10 @@
        
              </ContentTemplate> 
              
-             </asp:UpdatePanel>   
+             </asp:UpdatePanel>  
+
+           </div>  
+        </asp:Panel> 
         <br />
   
         
@@ -402,10 +549,21 @@
         <asp:SqlDataSource ID="sqlD_clientsABR" runat="server" ConnectionString="<%$ ConnectionStrings:email_metricsConnectionString %>"
             SelectCommand="SELECT clients_abbr.* FROM clients_abbr">
         </asp:SqlDataSource>
-    
+
+        
         
         
         <br />
+
+
+
+
+    
+    
+    
+
+
+    <br />
 
 
 
@@ -428,9 +586,9 @@
         {
             width: 156px;
         }
-        .style4
+        .style6
         {
-            margin-left: 0px;
+            width: 212px;
         }
     </style>
 

@@ -170,6 +170,7 @@ Partial Class _Default
             UpdatePanel2.Visible = False
             UpdatePanel3.Visible = False
             UpdatePanel4.Visible = False
+            UpdatePanel5.Visible = False
             Button1.Visible = False
             'Panel1.Visible = True
         End If
@@ -257,13 +258,6 @@ Partial Class _Default
         
 		End Sub
 
-    Protected Sub btnPdescShow_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnPdescShow.Click
-        chkProjDesc.Visible = True
-    End Sub
-
-    Protected Sub btnPdescHide_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnPdescHide.Click
-        chkProjDesc.Visible = False
-    End Sub
 
     Protected Sub drp_list_segment_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles drp_list_segment.SelectedIndexChanged
         ph_list_segments.Controls.Clear()

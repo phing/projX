@@ -5,11 +5,31 @@
 body, div, p, h1, h2, h3, h4, ul, li, table
 {
 	margin:0;
-	padding:0;
+	padding: 0px;   
 	border:none;
 }
 
-
+.squarebox {
+    width: 800px;
+    text-align: left;
+    border: solid 1px #336699;
+    overflow: hidden;
+   }
+   
+   
+.squareboxgradientcaption {
+    color: White;
+    padding: 5px;
+    background-image: url(images/gradient_blue.png);
+    background-repeat: repeat-x;
+    overflow: hidden; 
+    width: 800px; }
+    
+.squareboxcontent {
+    background-color: #f5f5f5;
+    padding: 5px;
+    overflow: hidden; 
+    }
 
 .mainheadfont   
 {
